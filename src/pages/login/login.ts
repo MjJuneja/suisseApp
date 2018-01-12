@@ -20,7 +20,7 @@ export class LoginPage {
     loginpassword: ''
   };
   logo:String = "assets/img/icon.png";
-  Data:Object;
+  Data:any;
   // Our translated text strings
   private loginErrorString: string;
 

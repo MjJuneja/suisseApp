@@ -9,7 +9,7 @@ export class LoginApi{
 
    }
     
-    isAuthenticate(obj:{email:String,loginpassword:String}):Promise<Object>{
+    isAuthenticate(obj:{email:String,loginpassword:String}):Promise<any>{
     var url ="http://api.suisse-coin.com/authenticate/";
     let headers = new Headers();
     this.Data = "email="+obj.email+"&loginpassword="+obj.loginpassword;
