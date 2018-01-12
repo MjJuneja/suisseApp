@@ -39,9 +39,9 @@ export class LoginPage {
     })
   }
 
-  showAlert() {
+  showAlert(data:String) {
     let alert = this.alertCtrl.create({
-      title: 'Please enter email & password',
+      title: data,
       buttons: ['OK']
     });
     alert.present();
@@ -64,15 +64,18 @@ export class LoginPage {
     //   toast.present();
     // });
     
-    if(this.account.email.length>0 && this.account.loginpassword.length>0){
+    if(this.account.email.trim().length>0 && this.account.loginpassword.trim().length>0){
     this.Data = this.api.isAuthenticate(this.account);
     this.Data.then((data)=>{
       //use data.data for data 
       console.log(data);
+      if(data.error_message=="Invalid Username or Password"){
+           this.showAlert("Invalid Username or Password");
+      }
     })
   }
   else{
-        this.showAlert();
+        this.showAlert('Please enter email & password');
   }
   }
 }
