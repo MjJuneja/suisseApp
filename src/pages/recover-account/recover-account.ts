@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
-
+import {RecoverPasswordPage} from '../recover-password/recover-password';
 /**
  * Generated class for the RecoverAccountPage page.
  *
@@ -33,7 +33,7 @@ export class RecoverAccountPage {
   }
 
   forgot_password(){
-    
+      this.navCtrl.push(RecoverPasswordPage);
   }
 
 }

@@ -15,6 +15,7 @@ import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
 import {HttpModule} from '@angular/http';
 import {RecoverAccountPage} from '../pages/recover-account/recover-account';
+import {RecoverPasswordPage} from '../pages/recover-password/recover-password';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -39,7 +40,8 @@ export function provideSettings(storage: Storage) {
 @NgModule({
   declarations: [
     MyApp,
-    RecoverAccountPage
+    RecoverAccountPage,
+    RecoverPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ export function provideSettings(storage: Storage) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    RecoverAccountPage
+    RecoverAccountPage,
+    RecoverPasswordPage
   ],
   providers: [
     Api,
