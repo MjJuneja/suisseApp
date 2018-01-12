@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController,AlertController } from 'ionic-angular';
 import {LoginApi} from './login-api';
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
@@ -21,6 +21,8 @@ export class LoginPage {
   };
   logo:String = "assets/img/icon.png";
   Data:any;
+
+  
   // Our translated text strings
   private loginErrorString: string;
 
@@ -29,11 +31,20 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public api:LoginApi,
+    public alertCtrl:AlertController
   ) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Please enter email & password',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   // Attempt to login in through our User service
@@ -53,11 +64,15 @@ export class LoginPage {
     //   toast.present();
     // });
     
-    
+    if(this.account.email.length>0 && this.account.loginpassword.length>0){
     this.Data = this.api.isAuthenticate(this.account);
     this.Data.then((data)=>{
       //use data.data for data 
       console.log(data);
     })
+  }
+  else{
+        this.showAlert();
+  }
   }
 }
