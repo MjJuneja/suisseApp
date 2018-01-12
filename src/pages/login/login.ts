@@ -21,6 +21,7 @@ export class LoginPage {
     loginpassword: ''
   };
   logo:String = "assets/img/icon.png";
+  logo1:String = "assets/img/logo.png";
   Data:any;
 
   
@@ -42,7 +43,7 @@ export class LoginPage {
     this.menu.enable(false, 'myMenu');
   }
 
-  showAlert(data:String) {
+  showAlert(data:any) {
     let alert = this.alertCtrl.create({
       title: data,
       buttons: ['OK']

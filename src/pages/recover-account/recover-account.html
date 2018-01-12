@@ -1,18 +1,16 @@
-<!--
-  Generated template for the RecoverAccountPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar hideBackButton>
-    <ion-title>recover_account</ion-title>
-  </ion-navbar>
-
+<img [src]="logo" alt="">
+<img [src]="logo1" alt="">
 </ion-header>
 
 
 <ion-content padding>
-
+  <h3>Recover Account</h3>
+  <button ion-button (click)="forgot_email()">I forgot my email</button>
+  <br>
+  <button ion-button (click)="forgot_password()">I forgot my password</button>
+  <br>
+  <a (click)="back()">Back to Sign In</a>
 </ion-content>
+

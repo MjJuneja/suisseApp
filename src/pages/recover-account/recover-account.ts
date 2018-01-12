@@ -14,13 +14,26 @@ import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angula
   templateUrl: 'recover-account.html',
 })
 export class RecoverAccountPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private menu:MenuController) {
-    this.menu.enable(true, 'myMenu')
+  logo:String = "assets/img/icon.png";
+  logo1:String = "assets/img/logo.png";
+  constructor(public navCtrl: NavController, public navParams: NavParams,private menu:MenuController
+  ) {
+    this.menu.enable(false, 'myMenu');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecoverAccountPage');
+  }
+
+  back(){
+    this.navCtrl.pop();
+  }
+  forgot_email(){
+
+  }
+
+  forgot_password(){
+    
   }
 
 }
