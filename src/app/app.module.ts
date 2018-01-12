@@ -47,10 +47,11 @@ export function provideSettings(storage: Storage) {
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
-        deps: [HttpClient]
+        deps: [HttpClient],
+        
       }
     }),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{tabsPlacement: 'top'}),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
