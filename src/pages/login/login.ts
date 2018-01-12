@@ -15,10 +15,10 @@ export class LoginPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+    email: '',
+    password: ''
   };
-
+  logo:String = "assets/img/icon.png";
   // Our translated text strings
   private loginErrorString: string;
 
