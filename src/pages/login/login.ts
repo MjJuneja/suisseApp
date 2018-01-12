@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController,AlertController,MenuController } from 'ionic-angular';
 import {LoginApi} from './login-api';
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
+import {RecoverAccountPage} from '../recover-account/recover-account';
 // import {Http,Headers} from '@angular/http';
 @IonicPage()
 @Component({
@@ -31,12 +32,14 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public api:LoginApi,
-    public alertCtrl:AlertController
+    public alertCtrl:AlertController,
+    private menu:MenuController
   ) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+    this.menu.enable(false, 'myMenu');
   }
 
   showAlert(data:String) {
@@ -77,5 +80,9 @@ export class LoginPage {
   else{
         this.showAlert('Please enter email & password');
   }
-  }
+}
+
+forget(){
+    this.navCtrl.push(RecoverAccountPage);
+}
 }
