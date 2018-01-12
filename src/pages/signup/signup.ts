@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+import { Http, Headers } from '@angular/http';
 
-import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
 
 @IonicPage()
 @Component({
@@ -11,43 +9,52 @@ import { MainPage } from '../pages';
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { name: string, email: string, password: string } = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
+
+  signup: { yname: string, email: string, password1: string, password2: string, spassword1: string, spassword2: string } = {
+    yname: '',
+    email: '',
+    password1: '',
+    password2: '',
+    spassword1: '',
+    spassword2: ''
+  };
+  constructor(private http: Http, private headers:Headers) { }
+
+  doRegister = (): void => {
+    if (!this.signup.password1 || !this.signup.password2 || this.signup.password1 !== this.signup.password2) {
+      alert("Password not matched ! try again");
+      this.signup.password1 = this.signup.password2 = '';
+    }
+    else if (!this.signup.spassword1 || !this.signup.spassword2 || this.signup.spassword1 !== this.signup.spassword2) {
+      alert("Spending Password not matched ! try again");
+      this.signup.spassword1 = this.signup.spassword2 = '';
+    }
+    else {
+      let url = "http://api.suisse-coin.com/create_Wallet/";
+      let data = "username=" + this.signup.yname + "&email=" + this.signup.email + "&loginpassword" + this.signup.password1 + "&spendingpassword" + this.signup.spassword1;
+      this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      this.http.post(url, data, {
+        headers: this.headers
+      }).subscribe((data => {
+        console.log(data);
+      }),(error=>{
+        console.log(error);
+      }));
+      //   var obj = {
+      //     username:this.signup.yname,
+      //     email: this.signup.email,
+      //     // Country: $scope.formData.country,
+      //     // SponsoredEmailId: $scope.formData.ID,
+      //     loginpassword: this.signup.password1,
+      //     spendingpassword: this.signup.spassword1
+      //   }
+      //   let promise=this.callServer(obj);
+      //   promise.subscribe((result => {
+      //       console.log(result);
+      //     }),(error=>{
+      //       console.log(error);
+      //     }));
+    }
   };
 
-  // Our translated text strings
-  private signupErrorString: string;
-
-  constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
-  }
-
-  doSignup() {
-    // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-
-      this.navCtrl.push(MainPage);
-
-      // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
-  }
 }
