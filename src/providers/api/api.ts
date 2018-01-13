@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {AlertController} from 'ionic-angular';
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class Api {
   url: string = 'https://example.com/api/v1';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public alertCtrl:AlertController) {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
@@ -43,5 +43,12 @@ export class Api {
 
   patch(endpoint: string, body: any, reqOpts?: any) {
     return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+  }
+   showAlert(data:any) {
+    let alert = this.alertCtrl.create({
+      title: data,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

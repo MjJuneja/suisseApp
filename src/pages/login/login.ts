@@ -5,6 +5,8 @@ import {LoginApi} from './login-api';
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
 import {RecoverAccountPage} from '../recover-account/recover-account';
+import {Api} from '../../providers/api/api';
+// import {SignupPage} from '../signup/signup';
 // import {Http,Headers} from '@angular/http';
 @IonicPage()
 @Component({
@@ -34,7 +36,8 @@ export class LoginPage {
     public translateService: TranslateService,
     public api:LoginApi,
     public alertCtrl:AlertController,
-    private menu:MenuController
+    private menu:MenuController,
+    private global_api:Api
   ) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -43,13 +46,13 @@ export class LoginPage {
     this.menu.enable(false, 'myMenu');
   }
 
-  showAlert(data:any) {
-    let alert = this.alertCtrl.create({
-      title: data,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
+  // showAlert(data:any) {
+  //   let alert = this.alertCtrl.create({
+  //     title: data,
+  //     buttons: ['OK']
+  //   });
+  //   alert.present();
+  // }
 
   // Attempt to login in through our User service
   doLogin() {
@@ -74,16 +77,21 @@ export class LoginPage {
       //use data.data for data 
       console.log(data);
       if(data.error_message=="Invalid Username or Password"){
-           this.showAlert("Invalid Username or Password");
+           this.global_api.showAlert("Invalid Username or Password");
       }
     })
   }
   else{
-        this.showAlert('Please enter email & password');
+        this.global_api.showAlert('Please enter email & password');
   }
 }
 
 forget(){
     this.navCtrl.push(RecoverAccountPage);
 }
+
+signUp(){
+    this.navCtrl.push('SignupPage');
+}
+
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController,AlertController} from 'ionic-angular';
 import {LoginPage} from '../login/login';
+import {recoverPassApi} from './recover_password_api';
+import {Api} from '../../providers/api/api';
 /**
  * Generated class for the RecoverPasswordPage page.
  *
@@ -12,12 +14,24 @@ import {LoginPage} from '../login/login';
 @Component({
   selector: 'page-recover-password',
   templateUrl: 'recover-password.html',
+  providers:[recoverPassApi]
 })
 export class RecoverPasswordPage {
   logo:String = "assets/img/icon.png";
   logo1:String = "assets/img/logo.png";
   email:String = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+   public navParams: NavParams,private api:recoverPassApi,public alertCtrl:AlertController,
+    private menu:MenuController, private global_api:Api
+   ) {
+  }
+
+  showAlert(data:any) {
+    let alert = this.alertCtrl.create({
+      title: data,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   ionViewDidLoad() {
@@ -28,6 +42,11 @@ export class RecoverPasswordPage {
   }
 
   recoverNow(){
-    
+    if(this.email.trim().length>0){
+    this.api.getOTP(this.email);
+  }
+  else{
+    this.global_api.showAlert("Please Enter the Email Id");
+  }
   }
 }
