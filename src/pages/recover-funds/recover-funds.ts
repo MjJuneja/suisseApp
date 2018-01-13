@@ -50,13 +50,15 @@ export class RecoverFundsPage {
       }
       this.data = this.api.isAuthenticate(obj);
       this.data.then((data)=>{
-        console.log(data);
         if(data.error_message){
           this.global_api.showAlert(data.error_message);
         }
-        else{
+        else if(data.data==='Success!'){
           this.global_api.showAlert("Successfull");
           this.navCtrl.push('LoginPage');
+        }
+        else{
+          console.log(data);
         }
       })
     }
