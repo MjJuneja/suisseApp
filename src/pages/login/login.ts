@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController,AlertController,MenuController } from 'ionic-angular';
 import {LoginApi} from './login-api';
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
+import {RecoverAccountPage} from '../recover-account/recover-account';
 // import {Http,Headers} from '@angular/http';
 @IonicPage()
 @Component({
@@ -20,7 +21,10 @@ export class LoginPage {
     loginpassword: ''
   };
   logo:String = "assets/img/icon.png";
+  logo1:String = "assets/img/logo.png";
   Data:any;
+
+  
   // Our translated text strings
   private loginErrorString: string;
 
@@ -29,11 +33,22 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public api:LoginApi,
+    public alertCtrl:AlertController,
+    private menu:MenuController
   ) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+    this.menu.enable(false, 'myMenu');
+  }
+
+  showAlert(data:any) {
+    let alert = this.alertCtrl.create({
+      title: data,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   // Attempt to login in through our User service
@@ -53,11 +68,22 @@ export class LoginPage {
     //   toast.present();
     // });
     
-    
+    if(this.account.email.trim().length>0 && this.account.loginpassword.trim().length>0){
     this.Data = this.api.isAuthenticate(this.account);
     this.Data.then((data)=>{
       //use data.data for data 
       console.log(data);
+      if(data.error_message=="Invalid Username or Password"){
+           this.showAlert("Invalid Username or Password");
+      }
     })
   }
+  else{
+        this.showAlert('Please enter email & password');
+  }
+}
+
+forget(){
+    this.navCtrl.push(RecoverAccountPage);
+}
 }

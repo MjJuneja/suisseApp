@@ -4,6 +4,7 @@
     <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
   </ion-navbar>-->
 <img [src]="logo" alt="">
+<img [src]="logo1" alt="">
 </ion-header>
 
 
@@ -39,9 +40,9 @@
 
     </ion-list>
   </form>
-<button (click)="show()">hey</button>
+
 <br>
-  <a >I can't access my account</a>
+  <a (click)="forget()">I can't access my account</a>
   <br>
-  <a href="">Don't have an account?<span>Sign Up</span></a>
+  <a>Don't have an account?<span>Sign Up</span></a>
 </ion-content>

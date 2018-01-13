@@ -8,13 +8,14 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
 import {HttpModule} from '@angular/http';
+import {RecoverAccountPage} from '../pages/recover-account/recover-account';
+import {RecoverPasswordPage} from '../pages/recover-password/recover-password';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -38,7 +39,9 @@ export function provideSettings(storage: Storage) {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    RecoverAccountPage,
+    RecoverPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,9 @@ export function provideSettings(storage: Storage) {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    RecoverAccountPage,
+    RecoverPasswordPage
   ],
   providers: [
     Api,
