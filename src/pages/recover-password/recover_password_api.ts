@@ -16,7 +16,7 @@ export class recoverPassApi {
     return this.http.get(url,{
         headers:headers
     }).toPromise().then((response)=>{
-        // return response.json();
+        return response.json();
         console.log(response.json());
     }).catch(this.handleError);
    
