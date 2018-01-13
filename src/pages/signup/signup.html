@@ -12,22 +12,28 @@
       <ion-list>
 
         <ion-item>
-          <ion-input type="text" [(ngModel)]="signup.yname" name="yname" placeholder="Your Name"></ion-input>
+          <ion-label floating>Your Name</ion-label>
+          <ion-input type="text" [(ngModel)]="signup.yname" name="yname"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="email" [(ngModel)]="signup.email" name="email" placeholder="Your Email"></ion-input>
+          <ion-label floating>Your Email</ion-label>
+          <ion-input type="email" [(ngModel)]="signup.email" name="email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="password" [(ngModel)]="signup.password1" name="password1" placeholder="Your Password"></ion-input>
+          <ion-label floating>Your Password</ion-label>
+          <ion-input type="password" [(ngModel)]="signup.password1" name="password1"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="password" [(ngModel)]="signup.password2" name="password2" placeholder="Confirm Password"></ion-input>
+          <ion-label floating>Confirm Password</ion-label>
+          <ion-input type="password" [(ngModel)]="signup.password2" name="password2"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="password" [(ngModel)]="signup.spassword1" name="spassword1" placeholder="Your Spending Password"></ion-input>
+          <ion-label floating>Your Spending Password</ion-label>
+          <ion-input type="password" [(ngModel)]="signup.spassword1" name="spassword1"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="password" [(ngModel)]="signup.spassword2" name="spassword2" placeholder="Confirm Spending Password"></ion-input>
+          <ion-label floating>Confirm Spending Password</ion-label>
+          <ion-input type="password" [(ngModel)]="signup.spassword2" name="spassword2"></ion-input>
         </ion-item>
 
         <div padding>
@@ -39,5 +45,5 @@
     </form>
 
     <br>
-    <a (click)="redirect()">Already have an account?<span>Log In</span></a>
+    <span>Already have an account?<a (click)="redirect()">Log In</a></span>
   </ion-content>
