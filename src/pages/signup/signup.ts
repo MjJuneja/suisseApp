@@ -1,6 +1,8 @@
+import { Api } from './../../providers/api/api';
 import { SignupApi } from './signup.service';
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, MenuController, AlertController,NavController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -19,17 +21,32 @@ export class SignupPage {
     spassword2: ''
   };
 
+  logo:String = "assets/img/icon.png";
+  logo1:String = "assets/img/logo.png";
 
-  constructor(public api:SignupApi) { }
+  constructor(public api:SignupApi, public alertCtrl:AlertController,
+    private menu:MenuController, public navCtrl: NavController, public global_api:Api) {
+      this.menu.enable(false, 'myMenu');
+    }
 
+    showAlert(data:any) {
+      let alert = this.alertCtrl.create({
+        title: data,
+        buttons: ['OK']
+      });
+      alert.present();
+    };
   data:any;
   doRegister = (): void => {
-    if (!this.signup.password1 || !this.signup.password2 || this.signup.password1 !== this.signup.password2) {
-      alert("Password not matched ! try again");
+    if(this.signup.yname.trim().length<1 || this.signup.email.trim().length<1 || this.signup.password1.trim().length<1 || this.signup.spassword1.trim().length<1){
+      this.showAlert("Fill complete data!");
+    }
+    else if (this.signup.password1.trim().length<1 || this.signup.password2.trim().length<1 || this.signup.password1 !== this.signup.password2) {
+      this.showAlert("Password not matched ! try again");
       this.signup.password1 = this.signup.password2 = '';
     }
-    else if (!this.signup.spassword1 || !this.signup.spassword2 || this.signup.spassword1 !== this.signup.spassword2) {
-      alert("Spending Password not matched ! try again");
+    else if (this.signup.spassword1.trim().length<1 || this.signup.spassword2.trim().length<1 || this.signup.spassword1 !== this.signup.spassword2) {
+      this.showAlert("Spending Password not matched ! try again");
       this.signup.spassword1 = this.signup.spassword2 = '';
     }
     else {
@@ -42,9 +59,18 @@ export class SignupPage {
       this.data = this.api.isAuthenticate(obj);
       this.data.then((data)=>{
         console.log(data);
-        // "error_message": "Sorry! You have a wallet already.",
+        if(data.error_message){
+          this.showAlert(data.error_message);
+        }
+        else{
+          this.showAlert("success");
+        }
       })
     }
+  };
+
+  redirect=():void=>{
+    this.navCtrl.push('LoginPage');
   };
 
 }

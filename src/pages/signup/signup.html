@@ -1,11 +1,11 @@
 <ion-header>
 
-  <img [src]="logo" alt="">
-  <p>Register Account</p>
+    <p>Register Account</p>
   </ion-header>
 
 
   <ion-content>
+
     <form (submit)="doRegister()">
       <ion-list>
 
@@ -37,5 +37,5 @@
     </form>
 
     <br>
-    <a href="">Already have an account?<span>Log In</span></a>
+    <a (click)="redirect()">Already have an account?<span>Log In</span></a>
   </ion-content>
