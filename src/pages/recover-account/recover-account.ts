@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController,AlertController } from 'ionic-angular';
 import {RecoverPasswordPage} from '../recover-password/recover-password';
 /**
  * Generated class for the RecoverAccountPage page.
