@@ -1,12 +1,12 @@
+import { SignupApi } from './signup.service';
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
-import { Http, Headers } from '@angular/http';
-
 
 @IonicPage()
 @Component({
   selector: 'page-signup',
-  templateUrl: 'signup.html'
+  templateUrl: 'signup.html',
+  providers:[SignupApi]
 })
 export class SignupPage {
 
@@ -18,8 +18,11 @@ export class SignupPage {
     spassword1: '',
     spassword2: ''
   };
-  constructor(private http: Http, private headers:Headers) { }
 
+
+  constructor(public api:SignupApi) { }
+
+  data:any;
   doRegister = (): void => {
     if (!this.signup.password1 || !this.signup.password2 || this.signup.password1 !== this.signup.password2) {
       alert("Password not matched ! try again");
@@ -30,30 +33,17 @@ export class SignupPage {
       this.signup.spassword1 = this.signup.spassword2 = '';
     }
     else {
-      let url = "http://api.suisse-coin.com/create_Wallet/";
-      let data = "username=" + this.signup.yname + "&email=" + this.signup.email + "&loginpassword" + this.signup.password1 + "&spendingpassword" + this.signup.spassword1;
-      this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      this.http.post(url, data, {
-        headers: this.headers
-      }).subscribe((data => {
+      let obj={
+        username:this.signup.yname,
+        email:this.signup.email,
+        loginpassword:this.signup.password1,
+        spendingpassword:this.signup.spassword1
+      }
+      this.data = this.api.isAuthenticate(obj);
+      this.data.then((data)=>{
         console.log(data);
-      }),(error=>{
-        console.log(error);
-      }));
-      //   var obj = {
-      //     username:this.signup.yname,
-      //     email: this.signup.email,
-      //     // Country: $scope.formData.country,
-      //     // SponsoredEmailId: $scope.formData.ID,
-      //     loginpassword: this.signup.password1,
-      //     spendingpassword: this.signup.spassword1
-      //   }
-      //   let promise=this.callServer(obj);
-      //   promise.subscribe((result => {
-      //       console.log(result);
-      //     }),(error=>{
-      //       console.log(error);
-      //     }));
+        // "error_message": "Sorry! You have a wallet already.",
+      })
     }
   };
 
