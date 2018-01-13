@@ -1,0 +1,37 @@
+<ion-header>
+<img [src]="logo" alt="">
+<img [src]="logo1" alt="">
+</ion-header>
+
+
+<ion-content padding>
+  <h3>Recover Password</h3>
+  <form (submit)="submitForm()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Enter OTP</ion-label>
+        <ion-input type="email" [(ngModel)]="account.otp" name="email"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+       
+        <ion-label floating>Enter Password</ion-label>
+        <ion-input  type="password" [(ngModel)]="account.password" name="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input  type="password" [(ngModel)]="confirm_pass" name="password"></ion-input>
+      </ion-item>
+
+      <div padding>
+
+        <button type="submit" ion-button color="primary">Submit</button>
+      </div>
+
+    </ion-list>
+  </form>
+  <a (click)="BackToSignIn()">Back to Sign In</a>
+</ion-content>

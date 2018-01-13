@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,MenuController,AlertController} fro
 import {LoginPage} from '../login/login';
 import {recoverPassApi} from './recover_password_api';
 import {Api} from '../../providers/api/api';
+import {ResetPassRecoverPage} from '../reset-pass-recover/reset-pass-recover';
 /**
  * Generated class for the RecoverPasswordPage page.
  *
@@ -22,7 +23,8 @@ export class RecoverPasswordPage {
   email:String = "";
   constructor(public navCtrl: NavController,
    public navParams: NavParams,private api:recoverPassApi,public alertCtrl:AlertController,
-    private menu:MenuController, private global_api:Api
+    private menu:MenuController, private global_api:Api,
+    
    ) {
   }
 
@@ -48,7 +50,7 @@ export class RecoverPasswordPage {
         this.global_api.showAlert("Invalid Username or Password");
       }
       else if(data.data=="success!"){
-        // this.navCtrl.push
+        this.navCtrl.push(ResetPassRecoverPage);
       }
     })
   }
