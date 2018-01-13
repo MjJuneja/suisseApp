@@ -43,7 +43,14 @@ export class RecoverPasswordPage {
 
   recoverNow(){
     if(this.email.trim().length>0){
-    this.api.getOTP(this.email);
+    this.api.getOTP(this.email).then((data)=>{
+      if(data.error_message=="Invalid Username or Password"){
+        this.global_api.showAlert("Invalid Username or Password");
+      }
+      else if(data.data=="success!"){
+        // this.navCtrl.push
+      }
+    })
   }
   else{
     this.global_api.showAlert("Please Enter the Email Id");
