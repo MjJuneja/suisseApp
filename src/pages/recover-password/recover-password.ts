@@ -50,7 +50,7 @@ export class RecoverPasswordPage {
         this.global_api.showAlert("Invalid Username or Password");
       }
       else if(data.data=="success!"){
-        this.navCtrl.push(ResetPassRecoverPage);
+        this.navCtrl.push(ResetPassRecoverPage,{email:this.email});
       }
     })
   }
