@@ -54,7 +54,7 @@ export class SignupPage {
           this.global_api.showAlert(data.error_message);
         }
         else{
-          localStorage.setItem("signup",data);
+          localStorage.setItem("signup",data.data);
           this.navCtrl.push('LoginPage');
         }
       })

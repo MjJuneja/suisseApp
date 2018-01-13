@@ -26,7 +26,7 @@ export class LoginPage {
   logo1:String = "assets/img/logo.png";
   Data:any;
 
-  
+
   // Our translated text strings
   private loginErrorString: string;
 
@@ -70,11 +70,12 @@ export class LoginPage {
     //   });
     //   toast.present();
     // });
-    
+
     if(this.account.email.trim().length>0 && this.account.loginpassword.trim().length>0){
     this.Data = this.api.isAuthenticate(this.account);
     this.Data.then((data)=>{
-      //use data.data for data 
+      //use data.data for data
+      localStorage.setItem("login",data.data);
       console.log(data);
       if(data.error_message=="Invalid Username or Password"){
            this.global_api.showAlert("Invalid Username or Password");
