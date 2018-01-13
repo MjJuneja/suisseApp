@@ -1,0 +1,18 @@
+<ion-header>
+
+    <img [src]="logo" alt="">
+    <img [src]="logo1" alt="">
+</ion-header>
+
+
+<ion-content padding>
+
+  <h3>Recover Funds</h3>
+  <ion-item>
+  <ion-label floating>Enter Mnemonic Phrase</ion-label>
+  <ion-input type="text" [(ngModel)]="mnemonic"></ion-input>
+  </ion-item>
+  <button (click)="passInput()">Recover Now</button>
+  <br>
+  <a (click)="redirect()"><span>Back to Sign in</span></a>
+</ion-content>

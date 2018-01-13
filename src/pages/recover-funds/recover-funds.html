@@ -1,0 +1,46 @@
+<ion-header>
+
+        <img [src]="logo" alt="">
+        <img [src]="logo1" alt="">
+    </ion-header>
+
+
+    <ion-content padding>
+
+      <h3>Recover Funds</h3>
+
+      <form (submit)="recoverFunds()">
+        <ion-list>
+
+          <ion-item>
+            <ion-label floating>Your Email</ion-label>
+            <ion-input type="email" [(ngModel)]="recover.email" name="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Your Password</ion-label>
+            <ion-input type="password" [(ngModel)]="recover.password1" name="password1"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input type="password" [(ngModel)]="recover.password2" name="password2"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Your Spending Password</ion-label>
+            <ion-input type="password" [(ngModel)]="recover.spassword1" name="spassword1"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Confirm Spending Password</ion-label>
+            <ion-input type="password" [(ngModel)]="recover.spassword2" name="spassword2"></ion-input>
+          </ion-item>
+
+          <div padding>
+
+            <button type="submit" ion-button color="primary" block>Submit</button>
+          </div>
+
+        </ion-list>
+      </form>
+
+      <br>
+      <a (click)="redirect()"><span>Back to Sign in</span></a>
+    </ion-content>

@@ -29,7 +29,7 @@ export class RecoverAccountPage {
     this.navCtrl.pop();
   }
   forgot_email(){
-
+    this.navCtrl.push('RecoverEmailPage');
   }
 
   forgot_password(){
